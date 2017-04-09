@@ -40,10 +40,12 @@ ext {
     junitVersion = '4.12'
     mockitoKotlinVersion = '1.1.0'
     kluentVersion = '1.14'
+    kotlinRunnerVersion = '0.3.1'
 
     //Aceptance Testing
     runnerVersion = '0.5'
     espressoVersion = '2.2.2'
+    conditionMatcherVersion = '0.1'
 
     compileTimeDependencies = [daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
                                javaxAnnotation         : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -89,12 +91,14 @@ ext {
             junit:              "junit:junit:${junitVersion}",
             mockitoKotlin:      "org.mockito:mockito-core:${mockitoKotlinVersion}",
             kluent:             "org.amshove.kluent:kluent:${kluentVersion}",
-            kotlinStdLib:       "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"]
+            kotlinStdLib:       "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            kotlinRunner:       "de.jodamob.kotlin:kotlin-runner-junit4:${kotlinRunnerVersion}"]
 
     acceptanceTesting = [
             testRunner:         "com.android.support.test:runner:${runnerVersion}",
             testRules:          "com.android.support.test:rules:${runnerVersion}",
             espressoCore:       "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             espressoIntents:    "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            conditionMatcher:   "com.azimolabs.conditionwatcher:conditionwatcher:${conditionMatcherVersion}",
             androidAnnotations: "com.android.support:support-annotations:${supportLibraryVersion}"]
 }

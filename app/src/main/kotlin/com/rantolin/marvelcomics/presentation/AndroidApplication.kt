@@ -1,6 +1,8 @@
 package com.rantolin.marvelcomics.presentation
 
+import android.app.Activity
 import android.app.Application
+import android.os.Bundle
 import com.rantolin.marvelcomics.presentation.internal.di.components.ApplicationComponent
 import com.rantolin.marvelcomics.presentation.internal.di.components.DaggerApplicationComponent
 import com.rantolin.marvelcomics.presentation.internal.di.modules.ApplicationModule
@@ -9,7 +11,8 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 
 
-class AndroidApplication : Application() {
+class AndroidApplication : Application(), Application.ActivityLifecycleCallbacks {
+    private var currentActivity: Activity? = null
 
     val component: ApplicationComponent
         get() = DaggerApplicationComponent.builder()
@@ -21,6 +24,7 @@ class AndroidApplication : Application() {
         this.initializeLeakDetection()
         component.inject(this)
         initRealm()
+        registerActivityLifecycleCallbacks(this)
     }
 
 
@@ -37,5 +41,37 @@ class AndroidApplication : Application() {
                 .deleteRealmIfMigrationNeeded()
                 .build()
         Realm.setDefaultConfiguration(realmConfiguration)
+    }
+
+    override fun onActivityPaused(p0: Activity?) {
+
+    }
+
+    override fun onActivityResumed(p0: Activity?) {
+        currentActivity = p0
+    }
+
+    override fun onActivityStarted(p0: Activity?) {
+        currentActivity = p0
+    }
+
+    override fun onActivityDestroyed(p0: Activity?) {
+
+    }
+
+    override fun onActivitySaveInstanceState(p0: Activity?, p1: Bundle?) {
+
+    }
+
+    override fun onActivityStopped(p0: Activity?) {
+
+    }
+
+    override fun onActivityCreated(p0: Activity?, p1: Bundle?) {
+        currentActivity = p0
+    }
+
+    fun getCurrentActivity(): Activity? {
+        return currentActivity
     }
 }

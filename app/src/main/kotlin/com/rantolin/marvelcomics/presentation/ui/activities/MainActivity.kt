@@ -25,6 +25,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), DrawerView {
 
     var characterModel: CharacterModel? = null
+    var fragment = MainFragment.newInstance(null)
 
     @Inject
     lateinit var drawerPresenter: DrawerPresenter
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity(), DrawerView {
     }
 
     fun inflateMainFragment(){
-        navigateToFragment(MainFragment.newInstance(null), R.id.fragmentContainer,false)
+        navigateToFragment(fragment, R.id.fragmentContainer,false)
     }
 
     override fun showError(throwable: Throwable) {
